@@ -10,17 +10,21 @@ public class Bullet {
     private int width,height;
     private Dir dir =Dir.DOWN;
     private static  final int SPEED=10;
-    private boolean moving=false;
+    private boolean living=true;
+    private TestFrame tf=null;
 
 
-    public Bullet(int x, int y, int width, int height, Dir dir) {
+    public Bullet(int x, int y, int width, int height, Dir dir,TestFrame tf) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.dir = dir;
+        this.tf = tf;
     }
     public void paint(Graphics g) {
+        //子弹死了则移除
+        if (!living)tf.bullets.remove(this);
         Color c= g.getColor();
         g.setColor(Color.GREEN);
         g.fillOval(x,y,width,height);
@@ -38,5 +42,6 @@ public class Bullet {
             case DOWN : y+=SPEED;
                 break;
         }
+        if (x<0||y<0||x>tf.getWidth()||y>tf.getHeight())living=false;
     }
 }
