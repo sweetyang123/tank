@@ -8,8 +8,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class TestFrame extends Frame {
-    private int x=100;
-    private int y=100;
+
+    private  Dir dir=Dir.DOWN;
+    Tank myTank = new Tank(100,100,50,50,dir);
     public TestFrame(){
         // Frame f =new Frame();
         setVisible(true);
@@ -27,35 +28,9 @@ public class TestFrame extends Frame {
     @Override
     public void paint(Graphics g){
         System.out.println("paint");
-        g.fillRect(x,y,80,80);
-//        x+=50;
-//        y+=50;
+//        g.fillRect(myTank,y,80,80);
+        myTank.paint(g);
     }
-//    class myKeyListener extends KeyAdapter {
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            int key=e.getKeyCode();
-//            switch (key){
-//                case KeyEvent.VK_LEFT:x-=50;
-//                    break;
-//                case KeyEvent.VK_UP:y-=50;
-//                    break;
-//                case KeyEvent.VK_RIGHT:x+=50;
-//                    break;
-//                case KeyEvent.VK_DOWN:y+=50;
-//                    break;
-//                default: break;
-//            }
-////            x+=60;
-//            repaint();
-//            System.out.println("key press");
-//        }
-//
-//        @Override
-//        public void keyReleased(KeyEvent e) {
-//            System.out.println("key release");
-//        }
-//    }
 
     class myKeyListener extends KeyAdapter {
         boolean BL=false;
@@ -76,11 +51,7 @@ public class TestFrame extends Frame {
                     break;
                 default: break;
             }
-            if (BL)x-=50;
-            if (BR)x+=50;
-            if (BU)y-=50;
-            if (BD)y+=50;
-            repaint();
+            setMainTankDir();
             System.out.println("key press");
         }
 
@@ -98,7 +69,14 @@ public class TestFrame extends Frame {
                     break;
                 default: break;
             }
+            setMainTankDir();
             System.out.println("key release");
+        }
+        private void setMainTankDir(){
+            if (BL)myTank.setDir(Dir.LEFT);
+            if (BR)myTank.setDir(Dir.RIGHT);
+            if (BU)myTank.setDir(Dir.UP);
+            if (BD)myTank.setDir(Dir.DOWN);
         }
     }
 }
