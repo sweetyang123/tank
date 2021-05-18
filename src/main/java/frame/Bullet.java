@@ -9,7 +9,7 @@ public class Bullet {
     private int x,y;
     private int width,height;
     private Dir dir =Dir.DOWN;
-    private static  final int SPEED=50;
+    private static  final int SPEED=10;
     private boolean moving=false;
 
 
@@ -28,6 +28,15 @@ public class Bullet {
         move();
     }
     private void move(){
-      y+=SPEED;
+        switch(dir){
+            case LEFT : x-=SPEED;
+                break;
+            case RIGHT : x+=SPEED;
+                break;
+            case UP : y-=SPEED;
+                break;
+            case DOWN : y+=SPEED;
+                break;
+        }
     }
 }
