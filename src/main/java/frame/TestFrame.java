@@ -6,11 +6,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestFrame extends Frame {
 
     Tank myTank = new Tank(100,100,50,50,Dir.DOWN,this);
-    Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
+//    java.util.List
+    List<Bullet> bullets= new ArrayList<Bullet>();
+   // Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
     public TestFrame(){
         // Frame f =new Frame();
@@ -30,9 +34,15 @@ public class TestFrame extends Frame {
     @Override
     public void paint(Graphics g){
         System.out.println("paint");
-//        g.fillRect(myTank,y,80,80);
+        Color c = g.getColor();
+        g.setColor(Color.MAGENTA);
+        g.drawString("子弹数量"+bullets.size(),50,60);
+        g.setColor(c);
         myTank.paint(g);
-        bullet.paint(g);
+        for (Bullet b:bullets) {
+            b.paint(g);
+        }
+
     }
     Image offScreenImage = null;
 //解决闪烁
