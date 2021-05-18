@@ -9,8 +9,9 @@ import java.awt.event.WindowEvent;
 
 public class TestFrame extends Frame {
 
-    Tank myTank = new Tank(100,100,50,50,Dir.DOWN);
-    Bullet bullet = new Bullet(10,10,20,20,Dir.DOWN);
+    Tank myTank = new Tank(100,100,50,50,Dir.DOWN,this);
+    Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
+    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
     public TestFrame(){
         // Frame f =new Frame();
         setVisible(true);
@@ -25,6 +26,7 @@ public class TestFrame extends Frame {
         addKeyListener(new myKeyListener());
     }
 
+
     @Override
     public void paint(Graphics g){
         System.out.println("paint");
@@ -32,7 +34,21 @@ public class TestFrame extends Frame {
         myTank.paint(g);
         bullet.paint(g);
     }
-
+    Image offScreenImage = null;
+//解决闪烁
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.BLACK);
+        gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }
     class myKeyListener extends KeyAdapter {
         boolean BL=false;
         boolean BR=false;
@@ -49,6 +65,8 @@ public class TestFrame extends Frame {
                 case KeyEvent.VK_RIGHT:BR=true;
                     break;
                 case KeyEvent.VK_DOWN:BD=true;
+                    break;
+                case KeyEvent.VK_CONTROL:myTank.fire();
                     break;
                 default: break;
             }
