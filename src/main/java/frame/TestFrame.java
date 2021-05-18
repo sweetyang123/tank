@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TestFrame extends Frame {
@@ -39,8 +40,17 @@ public class TestFrame extends Frame {
         g.drawString("子弹数量"+bullets.size(),50,60);
         g.setColor(c);
         myTank.paint(g);
+//        for (int i = 0; i <bullets.size() ; i++) {
+//            bullets.get(i).paint(g);
+//        }
+
         for (Bullet b:bullets) {
             b.paint(g);
+            }
+        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext(); ) {
+            Bullet iterator = it.next();
+            if (!iterator.living)bullets.remove(iterator);
+            else iterator.paint(g);
         }
 
     }
