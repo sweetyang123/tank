@@ -24,7 +24,7 @@ public class Bullet {
     }
     public void paint(Graphics g) {
         //子弹死了则移除
-//        if (!living)tf.bullets.remove(this);
+        if (!living)tf.bullets.remove(this);
         Color c= g.getColor();
         g.setColor(Color.GREEN);
         g.fillOval(x,y,width,height);

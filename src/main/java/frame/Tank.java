@@ -30,7 +30,8 @@ public class Tank {
     public void paint(Graphics g) {
         Color c =g.getColor();
         g.setColor(Color.RED);
-        g.fillRect(x,y,width,height);
+        g.drawImage(ResourceImg.tankD,x,y,null);
+        //g.fillRect(x,y,width,height);
         g.setColor(c);
         move();
     }
