@@ -9,8 +9,8 @@ import java.awt.event.WindowEvent;
 
 public class TestFrame extends Frame {
 
-    private  Dir dir=Dir.DOWN;
-    Tank myTank = new Tank(100,100,50,50,dir);
+    Tank myTank = new Tank(100,100,50,50,Dir.DOWN);
+    Bullet bullet = new Bullet(10,10,20,20,Dir.DOWN);
     public TestFrame(){
         // Frame f =new Frame();
         setVisible(true);
@@ -30,6 +30,7 @@ public class TestFrame extends Frame {
         System.out.println("paint");
 //        g.fillRect(myTank,y,80,80);
         myTank.paint(g);
+        bullet.paint(g);
     }
 
     class myKeyListener extends KeyAdapter {
@@ -73,10 +74,16 @@ public class TestFrame extends Frame {
             System.out.println("key release");
         }
         private void setMainTankDir(){
-            if (BL)myTank.setDir(Dir.LEFT);
-            if (BR)myTank.setDir(Dir.RIGHT);
-            if (BU)myTank.setDir(Dir.UP);
-            if (BD)myTank.setDir(Dir.DOWN);
+            if (!BL&&!BR&&!BU&&!BD)myTank.setMoving(false);
+            else {
+                myTank.setMoving(true);
+                if (BL)myTank.setDir(Dir.LEFT);
+                if (BR)myTank.setDir(Dir.RIGHT);
+                if (BU)myTank.setDir(Dir.UP);
+                if (BD)myTank.setDir(Dir.DOWN);
+
+            }
+
         }
     }
 }
