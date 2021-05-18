@@ -5,7 +5,7 @@ public class Main {
         TestFrame ts= new TestFrame();
      //ts.repaint();
         while (true){
-            Thread.sleep(500);
+            Thread.sleep(50);
             ts.repaint();
         }
     }
