@@ -7,7 +7,7 @@ public class Tank {
     private int height,width;
     private Dir dir;
     private boolean moving=false;
-    private static  final int SPEED=50;
+    private static  final int SPEED=20;
     private TestFrame  tf=null;
 
     public Tank(int x, int y,int height,int width,Dir dir,TestFrame  tf) {
@@ -58,7 +58,7 @@ public class Tank {
     }
 
     public void fire() {
-      tf.bullet=new Bullet(x,y,10,10,dir);
+      tf.bullets.add(new Bullet(x,y,10,10,dir,tf));
         System.out.println("========="+dir);
     }
 }
