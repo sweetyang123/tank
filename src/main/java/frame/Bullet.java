@@ -10,7 +10,7 @@ public class Bullet {
     private int width,height;
     private Dir dir =Dir.DOWN;
     private static  final int SPEED=10;
-    private boolean living=true;
+    public boolean living=true;
     private TestFrame tf=null;
 
 
@@ -24,7 +24,7 @@ public class Bullet {
     }
     public void paint(Graphics g) {
         //子弹死了则移除
-        if (!living)tf.bullets.remove(this);
+//        if (!living)tf.bullets.remove(this);
         Color c= g.getColor();
         g.setColor(Color.GREEN);
         g.fillOval(x,y,width,height);
