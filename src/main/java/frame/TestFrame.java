@@ -39,19 +39,19 @@ public class TestFrame  extends Frame {
         g.drawString("子弹数量"+bullets.size(),50,60);
         g.setColor(c);
         myTank.paint(g);
-//        for (int i = 0; i <bullets.size() ; i++) {
-//            bullets.get(i).paint(g);
-//        }
-
-        for (Bullet b:bullets) {
-            b.paint(g);
-            }
-            //迭代器迭代移除画面外的子弹
-        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext(); ) {
-            Bullet iterator = it.next();
-            if (!iterator.living)it.remove();
-            //else iterator.paint(g);
+        for (int i = 0; i <bullets.size() ; i++) {
+            bullets.get(i).paint(g);
         }
+
+//        for (Bullet b:bullets) {
+//            b.paint(g);
+//            }
+//            //迭代器迭代移除画面外的子弹
+//        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext(); ) {
+//            Bullet iterator = it.next();
+//            if (!iterator.living)it.remove();
+//            //else iterator.paint(g);
+//        }
 
     }
     Image offScreenImage = null;
