@@ -1,6 +1,7 @@
 package frame;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Tank {
     private int x,y;
@@ -30,7 +31,20 @@ public class Tank {
     public void paint(Graphics g) {
         Color c =g.getColor();
         g.setColor(Color.RED);
-        g.drawImage(ResourceImg.tankD,x,y,null);
+        //根据按键改变坦克炮铜方向
+        BufferedImage image=ResourceImg.tankD;
+        switch(dir){
+            case LEFT : image=ResourceImg.tankL;
+                break;
+            case RIGHT: image=ResourceImg.tankR;
+                break;
+            case UP: image=ResourceImg.tankU;
+                break;
+            case DOWN: image=ResourceImg.tankD;
+                break;
+        }
+        g.drawImage(image,x,y,null);
+
         //g.fillRect(x,y,width,height);
         g.setColor(c);
         move();
