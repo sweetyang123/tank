@@ -7,7 +7,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,6 +44,7 @@ public class TestFrame  extends Frame {
         for (int i = 0; i <bullets.size() ; i++) {
             bullets.get(i).paint(g);
         }
+
 
 //        for (Bullet b:bullets) {
 //            b.paint(g);
@@ -86,14 +89,11 @@ public class TestFrame  extends Frame {
                     break;
                 case KeyEvent.VK_DOWN:BD=true;
                     break;
-                case KeyEvent.VK_CONTROL:
-//                    System.out.println(111);
-                    myTank.fire();
+                case KeyEvent.VK_CONTROL:myTank.fire();
                     break;
                 default: break;
             }
             setMainTankDir();
-            System.out.println("key press");
         }
 
         @Override
@@ -111,7 +111,6 @@ public class TestFrame  extends Frame {
                 default: break;
             }
             setMainTankDir();
-            System.out.println("key release");
         }
         private void setMainTankDir(){
             if (!BL&&!BR&&!BU&&!BD)myTank.setMoving(false);
@@ -121,7 +120,6 @@ public class TestFrame  extends Frame {
                 if (BR)myTank.setDir(Dir.RIGHT);
                 if (BU)myTank.setDir(Dir.UP);
                 if (BD)myTank.setDir(Dir.DOWN);
-
             }
 
         }
