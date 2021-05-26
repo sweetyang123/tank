@@ -7,18 +7,17 @@ import java.awt.*;
  */
 public class Bullet {
     private int x,y;
-    private int width,height;
+    public static final int width=ResourceImg.bulletD.getWidth(),
+            height= ResourceImg.bulletD.getHeight();
     private Dir dir =Dir.DOWN;
     private static  final int SPEED=10;
     public boolean living=true;
     private TestFrame tf=null;
 
 
-    public Bullet(int x, int y, int width, int height, Dir dir,TestFrame tf) {
+    public Bullet(int x, int y,  Dir dir,TestFrame tf) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
         this.dir = dir;
         this.tf = tf;
     }
@@ -27,7 +26,17 @@ public class Bullet {
         if (!living)tf.bullets.remove(this);
         Color c= g.getColor();
         g.setColor(Color.GREEN);
-        g.fillOval(x,y,width,height);
+        switch(dir){
+            case LEFT : g.drawImage(ResourceImg.bulletL,x,y,null);
+                break;
+            case RIGHT: g.drawImage(ResourceImg.bulletR,x,y,null);
+                break;
+            case UP: g.drawImage(ResourceImg.bulletU,x,y,null);
+                break;
+            case DOWN: g.drawImage(ResourceImg.bulletD,x,y,null);
+                break;
+        }
+        //g.fillOval(x,y,width,height);
         g.setColor(c);
         move();
     }
