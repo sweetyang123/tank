@@ -1,21 +1,19 @@
 package frame;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Tank {
     private int x,y;
-    private int height,width;
+    public static  final int height=ResourceImg.tankD.getWidth(),
+            width=ResourceImg.tankD.getHeight();
     private Dir dir;
     private boolean moving=false;
     private static  final int SPEED=20;
     private TestFrame  tf=null;
 
-    public Tank(int x, int y,int height,int width,Dir dir,TestFrame  tf) {
+    public Tank(int x, int y,Dir dir,TestFrame  tf) {
         this.x = x;
         this.y = y;
-        this.height = height;
-        this.width = width;
         this.dir = dir;
         this.tf = tf;
     }
@@ -32,19 +30,16 @@ public class Tank {
         Color c =g.getColor();
         g.setColor(Color.RED);
         //根据按键改变坦克炮铜方向
-        BufferedImage image=ResourceImg.tankD;
         switch(dir){
-            case LEFT : image=ResourceImg.tankL;
+            case LEFT : g.drawImage(ResourceImg.tankL,x,y,null);
                 break;
-            case RIGHT: image=ResourceImg.tankR;
+            case RIGHT: g.drawImage(ResourceImg.tankR,x,y,null);
                 break;
-            case UP: image=ResourceImg.tankU;
+            case UP: g.drawImage(ResourceImg.tankU,x,y,null);
                 break;
-            case DOWN: image=ResourceImg.tankD;
+            case DOWN: g.drawImage(ResourceImg.tankD,x,y,null);
                 break;
         }
-        g.drawImage(image,x,y,null);
-
         //g.fillRect(x,y,width,height);
         g.setColor(c);
         move();
@@ -73,7 +68,8 @@ public class Tank {
     }
 
     public void fire() {
-      tf.bullets.add(new Bullet(x,y,10,10,dir,tf));
-        System.out.println("========="+dir);
+        int bx=this.x+Tank.width/2-Bullet.width/2;
+        int by=this.y+Tank.height/2-Bullet.height/2;
+      tf.bullets.add(new Bullet(bx,by,dir,tf));
     }
 }

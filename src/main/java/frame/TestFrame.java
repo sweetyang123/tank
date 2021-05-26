@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TestFrame  extends Frame {
 
-    Tank myTank = new Tank(100,100,50,50,Dir.DOWN,this);
+    Tank myTank = new Tank(100,100,Dir.DOWN,this);
 //    java.util.List
     List<Bullet> bullets= new ArrayList<Bullet>();
    // Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
