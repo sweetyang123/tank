@@ -8,6 +8,7 @@ public class Tank {
             width=ResourceImg.tankD.getHeight();
     private Dir dir;
     private boolean moving=false;
+    private boolean living=true;
     private static  final int SPEED=20;
     private TestFrame  tf=null;
 
@@ -27,6 +28,7 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
+        if (!living)tf.tanks.remove(this);
         Color c =g.getColor();
         g.setColor(Color.RED);
         //根据按键改变坦克炮铜方向
@@ -71,5 +73,19 @@ public class Tank {
         int bx=this.x+Tank.width/2-Bullet.width/2;
         int by=this.y+Tank.height/2-Bullet.height/2;
       tf.bullets.add(new Bullet(bx,by,dir,tf));
+    }
+    //将坦克和子弹转为矩形，对两个矩形进行碰撞检测
+    public void collWith(Bullet bullet) {
+        Rectangle tankRect = new Rectangle(this.x,this.y,width,height);
+        Rectangle bulletRect = new Rectangle(bullet.getX(),bullet.getY(),bullet.width,bullet.height);
+        if (tankRect.intersects(bulletRect)){
+            //碰撞后子弹和坦克都死掉，从list里移除，并living属性为false
+            this.die();
+            bullet.die();
+        }
+    }
+
+    private void die() {
+        this.living=false;
     }
 }

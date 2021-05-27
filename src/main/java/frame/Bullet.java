@@ -6,6 +6,8 @@ import java.awt.*;
  * 子弹
  */
 public class Bullet {
+
+
     private int x,y;
     public static final int width=ResourceImg.bulletD.getWidth(),
             height= ResourceImg.bulletD.getHeight();
@@ -52,5 +54,16 @@ public class Bullet {
                 break;
         }
         if (x<0||y<0||x>tf.getWidth()||y>tf.getHeight())living=false;
+    }
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void die() {
+        living=false;
     }
 }

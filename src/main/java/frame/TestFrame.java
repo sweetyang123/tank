@@ -18,6 +18,7 @@ public class TestFrame  extends Frame {
     Tank myTank = new Tank(100,100,Dir.DOWN,this);
 //    java.util.List
     List<Bullet> bullets= new ArrayList<Bullet>();
+    List<Tank> tanks= new ArrayList<Tank>();
    // Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
     public TestFrame(){
@@ -44,7 +45,15 @@ public class TestFrame  extends Frame {
         for (int i = 0; i <bullets.size() ; i++) {
             bullets.get(i).paint(g);
         }
-
+        for (int i = 0; i <tanks.size() ; i++) {
+            tanks.get(i).paint(g);
+        }
+        //给每个子弹与坦克进行碰撞检测
+        for (int i = 0; i <tanks.size() ; i++) {
+            for (int j = 0; j <bullets.size() ; j++) {
+                tanks.get(i).collWith(bullets.get(j));
+            }
+        }
 
 //        for (Bullet b:bullets) {
 //            b.paint(g);
