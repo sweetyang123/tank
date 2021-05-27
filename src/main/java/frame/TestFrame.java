@@ -7,19 +7,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class TestFrame  extends Frame {
 
     Tank myTank = new Tank(100,50,Group.GOOD,Dir.DOWN,this);
-//    java.util.List
     List<Bullet> bullets= new ArrayList<Bullet>();
     List<Tank> tanks= new ArrayList<Tank>();
-    Explode explode=new Explode(50,300,this);
+    List<Explode> explodes=new ArrayList<Explode>();
    // Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
     public TestFrame(){
@@ -56,7 +52,13 @@ public class TestFrame  extends Frame {
                 tanks.get(i).collWith(bullets.get(j));
             }
         }
-        explode.paint(g);
+        for (int i = 0; i <explodes.size() ; i++) {
+            explodes.get(i).paint(g);
+        }
+//        explode.paint(g);
+//        Audio audio=new Audio("audio/explode.wav");
+//        audio.play();
+
 //        for (Bullet b:bullets) {
 //            b.paint(g);
 //            }

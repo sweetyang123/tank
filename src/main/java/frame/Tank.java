@@ -32,7 +32,12 @@ public class Tank {
     }
 
     public void paint(Graphics g) {
-        if (!living)tf.tanks.remove(this);
+        if (!this.living){
+            tf.tanks.remove(this);
+//            tf.explodes.remove()
+//            Explode explode = new Explode(this.x, this.y, tf);
+//            explode.paint(g);
+        }
         Color c =g.getColor();
         g.setColor(Color.RED);
         //根据按键改变坦克炮铜方向
@@ -92,6 +97,8 @@ public class Tank {
             //碰撞后子弹和坦克都死掉，从list里移除，并living属性为false
             this.die();
             bullet.die();
+            //产生碰撞时加入爆炸
+            tf.explodes.add(new Explode(this.x,this.y,tf));
         }
     }
 
