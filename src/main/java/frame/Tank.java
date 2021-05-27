@@ -10,7 +10,7 @@ public class Tank {
     private Dir dir;
     private boolean moving=true;
     private boolean living=true;
-    private static  final int SPEED=1;
+    private static  final int SPEED=2;
     private TestFrame  tf=null;
     private Random random=new Random();
     private Group group=Group.GOOD;
@@ -72,6 +72,7 @@ public class Tank {
             case DOWN: y+=SPEED;
                 break;
         }
+        if (x<0||y<0||x>tf.getWidth()||y>tf.getHeight())living=false;
         //坦克随机掉子弹
         if (random.nextInt(10)>8)this.fire();
     }

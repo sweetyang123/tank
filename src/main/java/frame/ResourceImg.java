@@ -7,6 +7,7 @@ import java.io.IOException;
 public class ResourceImg {
     public static BufferedImage tankL,tankR,tankU,tankD;
     public static BufferedImage bulletL,bulletR,bulletU,bulletD;
+    public static BufferedImage[] explodes=new BufferedImage[16];
 
     static {
         try {
@@ -18,6 +19,10 @@ public class ResourceImg {
             bulletR= ImageIO.read(ResourceImg.class.getClassLoader().getResourceAsStream("image/bulletR.gif"));
             bulletU= ImageIO.read(ResourceImg.class.getClassLoader().getResourceAsStream("image/bulletU.gif"));
             bulletD= ImageIO.read(ResourceImg.class.getClassLoader().getResourceAsStream("image/bulletD.gif"));
+            for (int i = 0; i <explodes.length; i++) {
+                explodes[i]= ImageIO.read(ResourceImg.class.getClassLoader().getResourceAsStream("image/e"+(i+1)+"" +
+                        ".gif"));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

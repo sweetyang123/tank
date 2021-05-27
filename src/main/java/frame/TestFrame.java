@@ -19,6 +19,7 @@ public class TestFrame  extends Frame {
 //    java.util.List
     List<Bullet> bullets= new ArrayList<Bullet>();
     List<Tank> tanks= new ArrayList<Tank>();
+    Explode explode=new Explode(50,300,this);
    // Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
     static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
     public TestFrame(){
@@ -55,7 +56,7 @@ public class TestFrame  extends Frame {
                 tanks.get(i).collWith(bullets.get(j));
             }
         }
-
+        explode.paint(g);
 //        for (Bullet b:bullets) {
 //            b.paint(g);
 //            }
