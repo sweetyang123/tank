@@ -1,21 +1,25 @@
 package frame;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Tank {
     private int x,y;
     public static  final int height=ResourceImg.tankD.getWidth(),
             width=ResourceImg.tankD.getHeight();
     private Dir dir;
-    private boolean moving=false;
+    private boolean moving=true;
     private boolean living=true;
-    private static  final int SPEED=20;
+    private static  final int SPEED=1;
     private TestFrame  tf=null;
+    private Random random=new Random();
+    private Group group=Group.GOOD;
 
-    public Tank(int x, int y,Dir dir,TestFrame  tf) {
+    public Tank(int x, int y,Group group,Dir dir,TestFrame  tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -56,6 +60,7 @@ public class Tank {
     }
 
     private void move(){
+
         if (!moving)return;
         switch(dir){
             case LEFT : x-=SPEED;
@@ -67,15 +72,19 @@ public class Tank {
             case DOWN: y+=SPEED;
                 break;
         }
+        //坦克随机掉子弹
+        if (random.nextInt(10)>8)this.fire();
     }
 
     public void fire() {
         int bx=this.x+Tank.width/2-Bullet.width/2;
         int by=this.y+Tank.height/2-Bullet.height/2;
-      tf.bullets.add(new Bullet(bx,by,dir,tf));
+      tf.bullets.add(new Bullet(bx,by,this.group,dir,tf));
     }
     //将坦克和子弹转为矩形，对两个矩形进行碰撞检测
     public void collWith(Bullet bullet) {
+//        分组相同，则不进行碰撞
+        if (this.group==bullet.getGroup()) return;
         Rectangle tankRect = new Rectangle(this.x,this.y,width,height);
         Rectangle bulletRect = new Rectangle(bullet.getX(),bullet.getY(),bullet.width,bullet.height);
         if (tankRect.intersects(bulletRect)){

@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TestFrame  extends Frame {
 
-    Tank myTank = new Tank(100,100,Dir.DOWN,this);
+    Tank myTank = new Tank(100,50,Group.GOOD,Dir.DOWN,this);
 //    java.util.List
     List<Bullet> bullets= new ArrayList<Bullet>();
     List<Tank> tanks= new ArrayList<Tank>();
@@ -40,6 +40,7 @@ public class TestFrame  extends Frame {
         Color c = g.getColor();
         g.setColor(Color.MAGENTA);
         g.drawString("子弹数量"+bullets.size(),50,60);
+        g.drawString("坦克数量"+tanks.size(),50,70);
         g.setColor(c);
         myTank.paint(g);
         for (int i = 0; i <bullets.size() ; i++) {

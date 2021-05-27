@@ -16,11 +16,14 @@ public class Bullet {
     public boolean living=true;
     private TestFrame tf=null;
 
+    private Group group=Group.GOOD;
 
-    public Bullet(int x, int y,  Dir dir,TestFrame tf) {
+
+    public Bullet(int x, int y,Group group,Dir dir,TestFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
     public void paint(Graphics g) {
@@ -66,4 +69,13 @@ public class Bullet {
     public void die() {
         living=false;
     }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
 }
