@@ -79,7 +79,13 @@ public class Tank {
         }
         if (x<0||y<0||x>tf.getWidth()||y>tf.getHeight())living=false;
         //坦克随机掉子弹
-        if (random.nextInt(10)>8)this.fire();
+        if (this.group==Group.BAD&&random.nextInt(100)>95)this.fire();
+        //坦克随机动
+        if (this.group==Group.BAD&&random.nextInt(100)>95)this.randomDir();
+    }
+
+    private void randomDir() {
+        this.dir=Dir.values()[random.nextInt(4)];
     }
 
     public void fire() {
