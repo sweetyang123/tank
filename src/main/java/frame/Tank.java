@@ -15,12 +15,22 @@ public class Tank {
     private Random random=new Random();
     private Group group=Group.GOOD;
 
+
+
+    private  Rectangle tankRect=new Rectangle();
+//    private  Rectangle tankRect=new Rectangle(this.x,this.y,width,height);
+
     public Tank(int x, int y,Group group,Dir dir,TestFrame  tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        tankRect.x=this.x;
+        tankRect.y=this.y;
+        tankRect.width=width;
+        tankRect.height=height;
     }
 
     public Dir getDir() {
@@ -82,6 +92,19 @@ public class Tank {
         if (this.group==Group.BAD&&random.nextInt(100)>95)this.fire();
         //坦克随机动
         if (this.group==Group.BAD&&random.nextInt(100)>95)this.randomDir();
+        //边界检测
+        boundsCheck();
+        //移动时更新矩形位置
+        tankRect.x=this.x;
+        tankRect.y=this.y;
+    }
+
+    private void boundsCheck() {
+        if (this.x<5)x=5;
+        if (this.y<25)y=25;
+        if (this.x>this.tf.getWidth()-this.width-5)x=this.tf.getWidth()-this.width-5;
+        if (this.y>this.tf.getHeight()-this.height-5)y=this.tf.getHeight()-this.height-5;
+
     }
 
     private void randomDir() {
@@ -98,18 +121,30 @@ public class Tank {
     public void collWith(Bullet bullet) {
 //        分组相同，则不进行碰撞
         if (this.group==bullet.getGroup()) return;
-        Rectangle tankRect = new Rectangle(this.x,this.y,width,height);
-        Rectangle bulletRect = new Rectangle(bullet.getX(),bullet.getY(),bullet.width,bullet.height);
-        if (tankRect.intersects(bulletRect)){
+//        Rectangle tankRect = new Rectangle(this.x,this.y,width,height);
+//        Rectangle bulletRect = new Rectangle(bullet.getX(),bullet.getY(),bullet.width,bullet.height);
+        if (this.tankRect.intersects(bullet.getBulletRect())){
             //碰撞后子弹和坦克都死掉，从list里移除，并living属性为false
             this.die();
             bullet.die();
-            //产生碰撞时加入爆炸
-            tf.explodes.add(new Explode(this.x,this.y,tf));
+            //产生碰撞时加入爆炸或死时爆炸
+           // tf.explodes.add(new Explode(this.x,this.y,tf));
         }
     }
 
     private void die() {
         this.living=false;
+        int ex=this.x+Tank.width/2-Explode.width/2;
+        int ey=this.y+Tank.height/2-Explode.height/2;
+        //碰撞时加入爆炸
+         tf.explodes.add(new Explode(ex,ey,tf));
+    }
+
+    public Rectangle getTankRect() {
+        return tankRect;
+    }
+
+    public void setTankRect(Rectangle tankRect) {
+        this.tankRect = tankRect;
     }
 }

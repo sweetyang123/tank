@@ -17,6 +17,8 @@ public class Bullet {
     private TestFrame tf=null;
 
     private Group group=Group.GOOD;
+    private Rectangle bulletRect=new Rectangle();
+//    private Rectangle bulletRect=new Rectangle(this.x,this.y,width,height);
 
 
     public Bullet(int x, int y,Group group,Dir dir,TestFrame tf) {
@@ -25,6 +27,11 @@ public class Bullet {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+        //初始化子弹矩形
+        bulletRect.x=this.x;
+        bulletRect.y=this.y;
+        bulletRect.width=width;
+        bulletRect.height=height;
     }
     public void paint(Graphics g) {
         //子弹死了则移除
@@ -57,6 +64,9 @@ public class Bullet {
                 break;
         }
         if (x<0||y<0||x>tf.getWidth()||y>tf.getHeight())living=false;
+
+        bulletRect.x=this.x;
+        bulletRect.y=this.y;
     }
     public int getX() {
         return x;
@@ -78,4 +88,11 @@ public class Bullet {
         this.group = group;
     }
 
+    public Rectangle getBulletRect() {
+        return bulletRect;
+    }
+
+    public void setBulletRect(Rectangle bulletRect) {
+        this.bulletRect = bulletRect;
+    }
 }
