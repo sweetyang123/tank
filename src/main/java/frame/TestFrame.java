@@ -36,8 +36,9 @@ public class TestFrame  extends Frame {
         System.out.println("paint");
         Color c = g.getColor();
         g.setColor(Color.MAGENTA);
-        g.drawString("子弹数量"+bullets.size(),50,60);
-        g.drawString("坦克数量"+tanks.size(),50,70);
+        g.drawString("子弹数量"+bullets.size(),30,50);
+        g.drawString("坦克数量"+tanks.size(),30,60);
+        g.drawString("爆炸数量"+explodes.size(),30,70);
         g.setColor(c);
         myTank.paint(g);
         for (int i = 0; i <bullets.size() ; i++) {

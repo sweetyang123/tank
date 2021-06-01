@@ -5,12 +5,12 @@ import java.util.Random;
 
 public class Tank {
     private int x,y;
-    public static  final int height=ResourceImg.tankD.getWidth(),
-            width=ResourceImg.tankD.getHeight();
+    public static  final int height=ResourceImg.goodTankD.getWidth(),
+            width=ResourceImg.goodTankD.getHeight();
     private Dir dir;
     private boolean moving=true;
     private boolean living=true;
-    private static  final int SPEED=2;
+    private static  final int SPEED=3;
     private TestFrame  tf=null;
     private Random random=new Random();
     private Group group=Group.GOOD;
@@ -42,13 +42,13 @@ public class Tank {
         g.setColor(Color.RED);
         //根据按键改变坦克炮铜方向
         switch(dir){
-            case LEFT : g.drawImage(ResourceImg.tankL,x,y,null);
+            case LEFT : g.drawImage(this.group==Group.GOOD?ResourceImg.goodTankL:ResourceImg.badTankL,x,y,null);
                 break;
-            case RIGHT: g.drawImage(ResourceImg.tankR,x,y,null);
+            case RIGHT: g.drawImage(this.group==Group.GOOD?ResourceImg.goodTankR:ResourceImg.badTankR,x,y,null);
                 break;
-            case UP: g.drawImage(ResourceImg.tankU,x,y,null);
+            case UP: g.drawImage(this.group==Group.GOOD?ResourceImg.goodTankU:ResourceImg.badTankU,x,y,null);
                 break;
-            case DOWN: g.drawImage(ResourceImg.tankD,x,y,null);
+            case DOWN: g.drawImage(this.group==Group.GOOD?ResourceImg.goodTankD:ResourceImg.badTankD,x,y,null);
                 break;
         }
         //g.fillRect(x,y,width,height);
@@ -85,6 +85,7 @@ public class Tank {
     }
 
     private void randomDir() {
+        //Dir.values()等到枚举中值的一个数组
         this.dir=Dir.values()[random.nextInt(4)];
     }
 
