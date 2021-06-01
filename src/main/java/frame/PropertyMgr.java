@@ -3,32 +3,31 @@ package frame;
 import java.io.IOException;
 import java.util.Properties;
 
-import static frame.PropertyMgr.Property.getProp;
 
 public class PropertyMgr {
-    private static PropertyMgr instance;
-    private static Properties prop;
-
     private PropertyMgr() {
     }
-    static class Property{
-      public static Properties  getProp(){
-          if (prop==null){
-//              instance=new PropertyMgr();
-              prop = new Properties();
-              try {
-                  prop.load(PropertyMgr.class.getResourceAsStream("/resources/resconfig"));
-              } catch (IOException e) {
-                  e.printStackTrace();
-              }
-          }
-            return prop;
+    //JVM在加载类的时候只加载一次，所以只有一个实例，JVM 保证线程安全
+   private static class Property{
+       private static final Properties prop=new Properties();
+       private static final PropertyMgr instance=new PropertyMgr();
+   }
+    public static Properties getProp() {
+        try {
+            Property.prop.load(PropertyMgr.class.getResourceAsStream("/resources/resconfig"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return Property.prop;
+    }
+    public static PropertyMgr getInstance() {
+        return Property.instance;
     }
 
     public static int getInt(String key){
         return Integer.valueOf(getProp().getProperty(key));
     }
+
     public static String getString(String key){
         return getProp().getProperty(key)+"";
     }
