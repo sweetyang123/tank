@@ -17,7 +17,8 @@ public class TestFrame  extends Frame {
     List<Tank> tanks= new ArrayList<Tank>();
     List<Explode> explodes=new ArrayList<Explode>();
    // Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
-    static final int GAME_WIDTH = 1080, GAME_HEIGHT = 960;
+    static final int GAME_WIDTH = PropertyMgr.getInt("GAME_WIDTH"),
+           GAME_HEIGHT = PropertyMgr.getInt("GAME_HEIGHT");
     public TestFrame(){
         // Frame f =new Frame();
         setVisible(true);

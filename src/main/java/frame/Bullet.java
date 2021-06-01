@@ -12,7 +12,7 @@ public class Bullet {
     public static final int width=ResourceImg.bulletD.getWidth(),
             height= ResourceImg.bulletD.getHeight();
     private Dir dir =Dir.DOWN;
-    private static  final int SPEED=10;
+    private static  final int SPEED=PropertyMgr.getInt("bulletSpeed");
     public boolean living=true;
     private TestFrame tf=null;
 

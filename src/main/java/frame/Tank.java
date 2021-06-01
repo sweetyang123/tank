@@ -10,7 +10,7 @@ public class Tank {
     private Dir dir;
     private boolean moving=true;
     private boolean living=true;
-    private static  final int SPEED=3;
+    private static  final int SPEED=PropertyMgr.getInt("tankSpeed");
     private TestFrame  tf=null;
     private Random random=new Random();
     private Group group=Group.GOOD;
