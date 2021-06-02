@@ -14,6 +14,7 @@ public class Tank {
     private TestFrame  tf=null;
     private Random random=new Random();
     private Group group=Group.GOOD;
+    private FireStrategy fs;
 
 
 
@@ -31,6 +32,9 @@ public class Tank {
         tankRect.y=this.y;
         tankRect.width=width;
         tankRect.height=height;
+        //初始化时选择发火策略
+      if (this.group==Group.GOOD) fs=new FourDirFireStrategy();
+      else fs=new DefaultFireStrategy();
     }
 
     public Dir getDir() {
@@ -113,9 +117,7 @@ public class Tank {
     }
 
     public void fire() {
-        int bx=this.x+Tank.width/2-Bullet.width/2;
-        int by=this.y+Tank.height/2-Bullet.height/2;
-      tf.bullets.add(new Bullet(bx,by,this.group,dir,tf));
+        fs.fire(this);
     }
     //将坦克和子弹转为矩形，对两个矩形进行碰撞检测
     public void collWith(Bullet bullet) {
@@ -146,5 +148,37 @@ public class Tank {
 
     public void setTankRect(Rectangle tankRect) {
         this.tankRect = tankRect;
+    }
+
+    public FireStrategy getFs() {
+        return fs;
+    }
+
+    public void setFs(FireStrategy fs) {
+        this.fs = fs;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public TestFrame getTf() {
+        return tf;
     }
 }

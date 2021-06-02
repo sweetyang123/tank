@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * 子弹
  */
-public class Bullet {
+public class Bullet{
 
 
     private int x,y;
@@ -32,6 +32,8 @@ public class Bullet {
         bulletRect.y=this.y;
         bulletRect.width=width;
         bulletRect.height=height;
+
+        tf.bullets.add(this);
     }
     public void paint(Graphics g) {
         //子弹死了则移除
@@ -95,4 +97,6 @@ public class Bullet {
     public void setBulletRect(Rectangle bulletRect) {
         this.bulletRect = bulletRect;
     }
+
+
 }
