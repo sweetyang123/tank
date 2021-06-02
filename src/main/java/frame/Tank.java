@@ -33,8 +33,20 @@ public class Tank {
         tankRect.width=width;
         tankRect.height=height;
         //初始化时选择发火策略
-      if (this.group==Group.GOOD) fs=new FourDirFireStrategy();
-      else fs=new DefaultFireStrategy();
+        try {
+            if (this.group==Group.GOOD){
+                fs= (FireStrategy) Class.forName(PropertyMgr.getString("fourFS")).newInstance();
+            }
+            else fs= (FireStrategy) Class.forName(PropertyMgr.getString("defaultFS")).newInstance();
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Dir getDir() {
