@@ -1,13 +1,11 @@
-package frame;
-
-import frame.abstractfactory.BaseBullet;
+package tank01;
 
 import java.awt.*;
 
 /**
  * 子弹
  */
-public class Bullet extends BaseBullet {
+public class Bullet{
 
 
     private int x,y;
@@ -16,19 +14,19 @@ public class Bullet extends BaseBullet {
     private Dir dir =Dir.DOWN;
     private static  final int SPEED=PropertyMgr.getInt("bulletSpeed");
     public boolean living=true;
-    private GameModel gm=null;
+    private TestFrame tf=null;
 
-//    private Group group=Group.GOOD;
-//    private Rectangle bulletRect=new Rectangle();
+    private Group group=Group.GOOD;
+    private Rectangle bulletRect=new Rectangle();
 //    private Rectangle bulletRect=new Rectangle(this.x,this.y,width,height);
 
 
-    public Bullet(int x, int y,Group group,Dir dir,GameModel gm) {
+    public Bullet(int x, int y, Group group, Dir dir, TestFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
+        this.tf = tf;
         //初始化子弹矩形
         bulletRect.x=this.x;
         bulletRect.y=this.y;
@@ -39,7 +37,7 @@ public class Bullet extends BaseBullet {
     }
     public void paint(Graphics g) {
         //子弹死了则移除
-        if (!living)gm.bullets.remove(this);
+        if (!living)tf.bullets.remove(this);
         Color c= g.getColor();
         g.setColor(Color.GREEN);
         switch(dir){
@@ -67,7 +65,7 @@ public class Bullet extends BaseBullet {
             case DOWN : y+=SPEED;
                 break;
         }
-        if (x<0||y<0||x>gm.GAME_WIDTH||y>gm.GAME_HEIGHT)living=false;
+        if (x<0||y<0||x>tf.getWidth()||y>tf.getHeight())living=false;
 
         bulletRect.x=this.x;
         bulletRect.y=this.y;
