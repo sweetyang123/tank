@@ -1,20 +1,21 @@
-package frame;
+package frame.abstractfactory;
 
-import frame.abstractfactory.BaseBullet;
-import frame.abstractfactory.BaseTank;
+import frame.*;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Tank extends BaseTank {
-//    private int x,y;
+public class RectTank extends BaseTank {
+    private int x,y;
     public static  final int height=ResourceImg.goodTankD.getWidth(),
             width=ResourceImg.goodTankD.getHeight();
+    private Dir dir;
     private boolean moving=true;
     private boolean living=true;
     private static  final int SPEED=PropertyMgr.getInt("tankSpeed");
-
+//    private TestFrame  tf=null;
     private Random random=new Random();
+    private Group group=Group.GOOD;
     private FireStrategy fs;
 
 
@@ -23,7 +24,7 @@ public class Tank extends BaseTank {
 
 //    private  Rectangle tankRect=new Rectangle(this.x,this.y,width,height);
 
-    public Tank(int x, int y,Group group,Dir dir,TestFrame  tf) {
+    public RectTank(int x, int y, Group group, Dir dir, TestFrame  tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -62,9 +63,6 @@ public class Tank extends BaseTank {
     public void paint(Graphics g) {
         if (!this.living){
             tf.tanks.remove(this);
-//            tf.explodes.remove()
-//            Explode explode = new Explode(this.x, this.y, tf);
-//            explode.paint(g);
         }
         Color c =g.getColor();
         g.setColor(Color.RED);
@@ -84,9 +82,6 @@ public class Tank extends BaseTank {
         move();
     }
 
-    public boolean isMoving() {
-        return moving;
-    }
 
     public void setMoving(boolean moving) {
         this.moving = moving;
@@ -153,26 +148,10 @@ public class Tank extends BaseTank {
 
     private void die() {
         this.living=false;
-        int ex=this.x+Tank.width/2-Explode.width/2;
-        int ey=this.y+Tank.height/2-Explode.height/2;
+        int ex=this.x+RectTank.width/2-Explode.width/2;
+        int ey=this.y+RectTank.height/2-Explode.height/2;
         //碰撞时加入爆炸
-         tf.explodes.add(new Explode(ex,ey,tf));
-    }
-
-    public Rectangle getTankRect() {
-        return tankRect;
-    }
-
-    public void setTankRect(Rectangle tankRect) {
-        this.tankRect = tankRect;
-    }
-
-    public FireStrategy getFs() {
-        return fs;
-    }
-
-    public void setFs(FireStrategy fs) {
-        this.fs = fs;
+         tf.explodes.add(tf.gf.createExplode(ex,ey,tf));
     }
 
     public int getX() {

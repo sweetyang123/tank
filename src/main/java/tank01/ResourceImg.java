@@ -1,11 +1,11 @@
-package frame;
+package tank01;
 
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class ResourceImg implements ImgFactory{
+public class ResourceImg implements ImgFactory {
     public static BufferedImage goodTankL,goodTankR,goodTankU,goodTankD;
     public static BufferedImage badTankL,badTankR,badTankU,badTankD;
     public static BufferedImage bulletL,bulletR,bulletU,bulletD;

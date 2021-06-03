@@ -1,27 +1,22 @@
-package frame;
+package tank01;
 
 
-
-import frame.abstractfactory.*;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.peer.ListPeer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestFrame  extends Frame {
     ImgFactory imgFactory = new ResourceImg();
-//    Tank myTank = new Tank(100,50,Group.GOOD,Dir.DOWN,this);
-    public GameFactory gf=new DefaultFactory();
-    BaseTank myTank=gf.createTank(100,50,Group.GOOD,Dir.DOWN,this);
-   //不同包下需要加public
-    public List<BaseBullet> bullets= new ArrayList<BaseBullet>();
-    public List<BaseTank> tanks= new ArrayList<BaseTank>();
-    public List<BaseExplode> explodes=new ArrayList<BaseExplode>();
+    Tank myTank = new Tank(100,50,Group.GOOD,Dir.DOWN,this);
+//    Tank myTank = GameFactory
+    List<Bullet> bullets= new ArrayList<Bullet>();
+    List<Tank> tanks= new ArrayList<Tank>();
+    List<Explode> explodes=new ArrayList<Explode>();
    // Bullet bullet = new Bullet(150,150,20,20,Dir.DOWN);
     static final int GAME_WIDTH = PropertyMgr.getInt("GAME_WIDTH"),
            GAME_HEIGHT = PropertyMgr.getInt("GAME_HEIGHT");
