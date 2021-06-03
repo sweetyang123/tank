@@ -1,13 +1,13 @@
-package frame;
+package frame.abstractfactory;
 
-import frame.abstractfactory.BaseBullet;
+import frame.*;
 
 import java.awt.*;
 
 /**
  * 子弹
  */
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
 
 
     private int x,y;
@@ -23,7 +23,7 @@ public class Bullet extends BaseBullet {
 //    private Rectangle bulletRect=new Rectangle(this.x,this.y,width,height);
 
 
-    public Bullet(int x, int y,Group group,Dir dir,TestFrame tf) {
+    public RectBullet(int x, int y, Group group, Dir dir, TestFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -41,18 +41,9 @@ public class Bullet extends BaseBullet {
         //子弹死了则移除
         if (!living)tf.bullets.remove(this);
         Color c= g.getColor();
-        g.setColor(Color.GREEN);
-        switch(dir){
-            case LEFT : g.drawImage(ResourceImg.bulletL,x,y,null);
-                break;
-            case RIGHT: g.drawImage(ResourceImg.bulletR,x,y,null);
-                break;
-            case UP: g.drawImage(ResourceImg.bulletU,x,y,null);
-                break;
-            case DOWN: g.drawImage(ResourceImg.bulletD,x,y,null);
-                break;
-        }
-        //g.fillOval(x,y,width,height);
+        g.setColor(Color.yellow);
+
+        g.drawRect(x,y,20,20);
         g.setColor(c);
         move();
     }
@@ -94,10 +85,6 @@ public class Bullet extends BaseBullet {
 
     public Rectangle getBulletRect() {
         return bulletRect;
-    }
-
-    public void setBulletRect(Rectangle bulletRect) {
-        this.bulletRect = bulletRect;
     }
 
 

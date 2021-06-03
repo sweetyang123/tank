@@ -1,13 +1,11 @@
-package frame;
-
-import frame.abstractfactory.BaseExplode;
+package tank01;
 
 import java.awt.*;
 
 /**
  * 子弹
  */
-public class Explode extends BaseExplode {
+public class Explode {
     private int x,y;
     public static final int width=ResourceImg.explodes[0].getWidth(),
             height= ResourceImg.explodes[0].getHeight();
@@ -21,7 +19,7 @@ public class Explode extends BaseExplode {
     public void paint(Graphics g) {
         g.drawImage(ResourceImg.explodes[step++],x,y,null);
         //爆炸的图片显示完后，则从将该爆炸从爆炸组中移除
-        if (step>=ResourceImg.explodes.length)tf.explodes.remove(this);
+        if (step>= ResourceImg.explodes.length)tf.explodes.remove(this);
     }
     public int getX() {
         return x;

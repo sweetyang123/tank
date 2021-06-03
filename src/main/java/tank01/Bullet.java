@@ -1,13 +1,11 @@
-package frame;
-
-import frame.abstractfactory.BaseBullet;
+package tank01;
 
 import java.awt.*;
 
 /**
  * 子弹
  */
-public class Bullet extends BaseBullet {
+public class Bullet{
 
 
     private int x,y;
@@ -18,12 +16,12 @@ public class Bullet extends BaseBullet {
     public boolean living=true;
     private TestFrame tf=null;
 
-//    private Group group=Group.GOOD;
-//    private Rectangle bulletRect=new Rectangle();
+    private Group group=Group.GOOD;
+    private Rectangle bulletRect=new Rectangle();
 //    private Rectangle bulletRect=new Rectangle(this.x,this.y,width,height);
 
 
-    public Bullet(int x, int y,Group group,Dir dir,TestFrame tf) {
+    public Bullet(int x, int y, Group group, Dir dir, TestFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;

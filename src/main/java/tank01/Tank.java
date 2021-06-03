@@ -1,20 +1,20 @@
-package frame;
+package tank01;
 
-import frame.abstractfactory.BaseBullet;
-import frame.abstractfactory.BaseTank;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Tank extends BaseTank {
-//    private int x,y;
+public class Tank{
+    private int x,y;
     public static  final int height=ResourceImg.goodTankD.getWidth(),
             width=ResourceImg.goodTankD.getHeight();
+    private Dir dir;
     private boolean moving=true;
     private boolean living=true;
     private static  final int SPEED=PropertyMgr.getInt("tankSpeed");
-
+    private TestFrame tf=null;
     private Random random=new Random();
+    private Group group=Group.GOOD;
     private FireStrategy fs;
 
 
@@ -23,7 +23,7 @@ public class Tank extends BaseTank {
 
 //    private  Rectangle tankRect=new Rectangle(this.x,this.y,width,height);
 
-    public Tank(int x, int y,Group group,Dir dir,TestFrame  tf) {
+    public Tank(int x, int y, Group group, Dir dir, TestFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -58,7 +58,6 @@ public class Tank extends BaseTank {
     public void setDir(Dir dir) {
         this.dir = dir;
     }
-    @Override
     public void paint(Graphics g) {
         if (!this.living){
             tf.tanks.remove(this);
@@ -133,11 +132,8 @@ public class Tank extends BaseTank {
     public void fire() {
         fs.fire(this);
     }
-
-
     //将坦克和子弹转为矩形，对两个矩形进行碰撞检测
-    @Override
-    public void collWith(BaseBullet bullet) {
+    public void collWith(Bullet bullet) {
 //        分组相同，则不进行碰撞
         if (this.group==bullet.getGroup()) return;
 //        Rectangle tankRect = new Rectangle(this.x,this.y,width,height);
@@ -153,8 +149,8 @@ public class Tank extends BaseTank {
 
     private void die() {
         this.living=false;
-        int ex=this.x+Tank.width/2-Explode.width/2;
-        int ey=this.y+Tank.height/2-Explode.height/2;
+        int ex=this.x+ Tank.width/2-Explode.width/2;
+        int ey=this.y+ Tank.height/2-Explode.height/2;
         //碰撞时加入爆炸
          tf.explodes.add(new Explode(ex,ey,tf));
     }
