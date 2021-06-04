@@ -3,13 +3,13 @@ package frame.abstractfactory;
 import frame.*;
 
 public class RectFactory extends GameFactory{
-    public Tank createTank(int x, int y, Group group, Dir dir, TestFrame tf){
-        return  new Tank(x,y,group,dir,tf);
+    public RectTank createTank(int x, int y, Group group, Dir dir, TestFrame tf){
+        return  new RectTank(x,y,group,dir,tf);
     }
-    public Bullet createBullet(int x, int y,Group group,Dir dir,TestFrame tf){
-        return  new Bullet(x,y,group,dir,tf);
+    public RectBullet createBullet(int x, int y,Group group,Dir dir,TestFrame tf){
+        return  new RectBullet(x,y,group,dir,tf);
     }
-    public Explode createExplode(int x, int y, TestFrame tf){
-        return  new Explode(x,y,tf);
+    public RectExplode createExplode(int x, int y, TestFrame tf){
+        return  new RectExplode(x,y,tf);
     }
 }

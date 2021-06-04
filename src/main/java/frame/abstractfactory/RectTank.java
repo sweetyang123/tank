@@ -7,9 +7,9 @@ import java.util.Random;
 
 public class RectTank extends BaseTank {
     private int x,y;
-    public static  final int height=ResourceImg.goodTankD.getWidth(),
-            width=ResourceImg.goodTankD.getHeight();
-    private Dir dir;
+    public static  final int height=30,
+            width=30;
+//    private Dir dir;
     private boolean moving=true;
     private boolean living=true;
     private static  final int SPEED=PropertyMgr.getInt("tankSpeed");
@@ -17,7 +17,6 @@ public class RectTank extends BaseTank {
     private Random random=new Random();
     private Group group=Group.GOOD;
     private FireStrategy fs;
-
 
 
     private  Rectangle tankRect=new Rectangle();
@@ -35,20 +34,6 @@ public class RectTank extends BaseTank {
         tankRect.y=this.y;
         tankRect.width=width;
         tankRect.height=height;
-        //初始化时选择发火策略
-        try {
-            if (this.group==Group.GOOD){
-                fs= (FireStrategy) Class.forName(PropertyMgr.getString("fourFS")).newInstance();
-            }
-            else fs= new DefaultFireStrategy();
-
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -65,19 +50,13 @@ public class RectTank extends BaseTank {
             tf.tanks.remove(this);
         }
         Color c =g.getColor();
-        g.setColor(Color.RED);
-        //根据按键改变坦克炮铜方向
-        switch(dir){
-            case LEFT : g.drawImage(this.group==Group.GOOD?ResourceImg.goodTankL:ResourceImg.badTankL,x,y,null);
-                break;
-            case RIGHT: g.drawImage(this.group==Group.GOOD?ResourceImg.goodTankR:ResourceImg.badTankR,x,y,null);
-                break;
-            case UP: g.drawImage(this.group==Group.GOOD?ResourceImg.goodTankU:ResourceImg.badTankU,x,y,null);
-                break;
-            case DOWN: g.drawImage(this.group==Group.GOOD?ResourceImg.goodTankD:ResourceImg.badTankD,x,y,null);
-                break;
+        if (this.group == Group.GOOD) {
+            g.setColor(Color.RED);
+        } else {
+            g.setColor(Color.BLUE);
         }
-        //g.fillRect(x,y,width,height);
+//        g.drawRect(x,y,width,height);
+        g.fillRect(x,y,width,height);
         g.setColor(c);
         move();
     }
@@ -126,7 +105,18 @@ public class RectTank extends BaseTank {
     }
 
     public void fire() {
-        fs.fire(this);
+        int bx=this.x+this.width/2-BaseBullet.width/2;
+        int by=this.y+this.height/2-BaseBullet.height/2;
+        if (group==Group.GOOD){
+            Dir[] dirs = Dir.values();
+            for (Dir vdir:dirs) {
+                this.tf.gf.createBullet(bx,by,this.group,vdir,this.tf);
+            }
+        }else {
+            this.tf.gf.createBullet(bx,by,this.group,this.dir,this.tf);
+
+        }
+
     }
 
 
