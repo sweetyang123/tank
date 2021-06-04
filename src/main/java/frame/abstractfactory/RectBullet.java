@@ -11,8 +11,8 @@ public class RectBullet extends BaseBullet {
 
 
     private int x,y;
-    public static final int width=ResourceImg.bulletD.getWidth(),
-            height= ResourceImg.bulletD.getHeight();
+    public static final int width=10,
+            height= 10;
     private Dir dir =Dir.DOWN;
     private static  final int SPEED=PropertyMgr.getInt("bulletSpeed");
     public boolean living=true;
@@ -42,8 +42,7 @@ public class RectBullet extends BaseBullet {
         if (!living)tf.bullets.remove(this);
         Color c= g.getColor();
         g.setColor(Color.yellow);
-
-        g.drawRect(x,y,20,20);
+        g.fillRect(x,y,width,height);
         g.setColor(c);
         move();
     }

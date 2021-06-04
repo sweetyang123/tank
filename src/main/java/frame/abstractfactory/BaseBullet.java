@@ -5,6 +5,8 @@ import frame.Group;
 import java.awt.*;
 
 public abstract class BaseBullet {
+    public int x,y;
+    public static int height,width;
     public Group group=Group.GOOD;
     public Rectangle bulletRect=new Rectangle();
     public abstract void paint(Graphics g);
