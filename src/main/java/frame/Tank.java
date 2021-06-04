@@ -11,7 +11,7 @@ public class Tank {
     private boolean moving=true;
     private boolean living=true;
     private static  final int SPEED=PropertyMgr.getInt("tankSpeed");
-    private TestFrame  tf=null;
+    private GameModel  gm=null;
     private Random random=new Random();
     private Group group=Group.GOOD;
 
@@ -20,12 +20,12 @@ public class Tank {
     private  Rectangle tankRect=new Rectangle();
 //    private  Rectangle tankRect=new Rectangle(this.x,this.y,width,height);
 
-    public Tank(int x, int y,Group group,Dir dir,TestFrame  tf) {
+    public Tank(int x, int y,Group group,Dir dir,GameModel  gm) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.tf = tf;
+        this.gm = gm;
 
         tankRect.x=this.x;
         tankRect.y=this.y;
@@ -43,7 +43,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!this.living){
-            tf.tanks.remove(this);
+            gm.tanks.remove(this);
 //            tf.explodes.remove()
 //            Explode explode = new Explode(this.x, this.y, tf);
 //            explode.paint(g);
@@ -87,7 +87,7 @@ public class Tank {
             case DOWN: y+=SPEED;
                 break;
         }
-        if (x<0||y<0||x>tf.getWidth()||y>tf.getHeight())living=false;
+        if (x<0||y<0||x>gm.GAME_WIDTH||y>gm.GAME_HEIGHT)living=false;
         //坦克随机掉子弹
         if (this.group==Group.BAD&&random.nextInt(100)>95)this.fire();
         //坦克随机动
@@ -102,8 +102,8 @@ public class Tank {
     private void boundsCheck() {
         if (this.x<5)x=5;
         if (this.y<25)y=25;
-        if (this.x>this.tf.getWidth()-this.width-5)x=this.tf.getWidth()-this.width-5;
-        if (this.y>this.tf.getHeight()-this.height-5)y=this.tf.getHeight()-this.height-5;
+        if (this.x>gm.GAME_WIDTH-this.width-5)x=gm.GAME_WIDTH-this.width-5;
+        if (this.y>gm.GAME_HEIGHT-this.height-5)y=gm.GAME_HEIGHT-this.height-5;
 
     }
 
@@ -115,7 +115,14 @@ public class Tank {
     public void fire() {
         int bx=this.x+Tank.width/2-Bullet.width/2;
         int by=this.y+Tank.height/2-Bullet.height/2;
-      tf.bullets.add(new Bullet(bx,by,this.group,dir,tf));
+        if (group==Group.GOOD){
+            Dir[] dirs = Dir.values();
+            for (Dir dir1:dirs) {
+                gm.bullets.add(new Bullet(bx,by,this.group,dir1,gm));
+            }
+        }else {
+            gm.bullets.add(new Bullet(bx,by,this.group,dir,gm));
+        }
     }
     //将坦克和子弹转为矩形，对两个矩形进行碰撞检测
     public void collWith(Bullet bullet) {
@@ -137,7 +144,7 @@ public class Tank {
         int ex=this.x+Tank.width/2-Explode.width/2;
         int ey=this.y+Tank.height/2-Explode.height/2;
         //碰撞时加入爆炸
-         tf.explodes.add(new Explode(ex,ey,tf));
+         gm.explodes.add(new Explode(ex,ey,gm));
     }
 
     public Rectangle getTankRect() {
