@@ -6,14 +6,9 @@ import java.awt.*;
 
 public abstract class BaseTank {
    public int x,y;
-<<<<<<< HEAD
-   public Group group=Group.GOOD;
-   public Dir dir;
-=======
    public static int height,width;
    public Group group=Group.GOOD;
    public Dir dir=Dir.DOWN;
->>>>>>> origin/dp-web
    public TestFrame  tf=null;
 
 
