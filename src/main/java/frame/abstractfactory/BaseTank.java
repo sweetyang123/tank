@@ -6,9 +6,8 @@ import java.awt.*;
 
 public abstract class BaseTank {
    public int x,y;
-   public static int height,width;
    public Group group=Group.GOOD;
-   public Dir dir=Dir.DOWN;
+   public Dir dir;
    public TestFrame  tf=null;
 
 

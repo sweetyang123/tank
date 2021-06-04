@@ -15,8 +15,8 @@ import java.util.List;
 
 public class TestFrame  extends Frame {
     ImgFactory imgFactory = new ResourceImg();
+//    Tank myTank = new Tank(100,50,Group.GOOD,Dir.DOWN,this);
     public GameFactory gf=new DefaultFactory();
-//    public GameFactory gf=new RectFactory();
     BaseTank myTank=gf.createTank(100,50,Group.GOOD,Dir.DOWN,this);
    //不同包下需要加public
     public List<BaseBullet> bullets= new ArrayList<BaseBullet>();
@@ -62,6 +62,19 @@ public class TestFrame  extends Frame {
         for (int i = 0; i <explodes.size() ; i++) {
             explodes.get(i).paint(g);
         }
+//        explode.paint(g);
+//        Audio audio=new Audio("audio/explode.wav");
+//        audio.play();
+
+//        for (Bullet b:bullets) {
+//            b.paint(g);
+//            }
+//            //迭代器迭代移除画面外的子弹
+//        for (Iterator<Bullet> it = bullets.iterator(); it.hasNext(); ) {
+//            Bullet iterator = it.next();
+//            if (!iterator.living)it.remove();
+//            //else iterator.paint(g);
+//        }
 
     }
     Image offScreenImage = null;
