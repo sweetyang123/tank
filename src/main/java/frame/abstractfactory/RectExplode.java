@@ -10,8 +10,8 @@ import java.awt.*;
  */
 public class RectExplode extends BaseExplode {
     private int x,y;
-    public static final int width=10,
-            height= 10;
+    public static final int width=ResourceImg.explodes[0].getWidth(),
+            height= ResourceImg.explodes[0].getHeight();
     private TestFrame tf=null;
     int step=0;
     public RectExplode(int x, int y, TestFrame tf) {
@@ -20,13 +20,10 @@ public class RectExplode extends BaseExplode {
         this.tf = tf;
     }
     public void paint(Graphics g) {
-        Color c =g.getColor();
-        g.setColor(Color.MAGENTA);
-        g.fillRect(x,y,width+step,height+step);
-        g.setColor(c);
-        step+=5;
+        g.drawRect(x,y,step+5,step+5);
+        step++;
         //爆炸的图片显示完后，则从将该爆炸从爆炸组中移除
-        if (step>=40)tf.explodes.remove(this);
+        if (step>=30)tf.explodes.remove(this);
     }
     public int getX() {
         return x;
