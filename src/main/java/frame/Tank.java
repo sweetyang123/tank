@@ -17,7 +17,7 @@ public class Tank {
     private FireStrategy fs;
 
 
-
+    //解决每次碰撞时创建：一开始就创建对象，再跟随tank对象，移动和初始化时赋值
     private  Rectangle tankRect=new Rectangle();
 //    private  Rectangle tankRect=new Rectangle(this.x,this.y,width,height);
 
