@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * 子弹
  */
-public class Bullet {
+public class Bullet extends  GameObject{
 
 
     private int x,y;
@@ -35,7 +35,7 @@ public class Bullet {
     }
     public void paint(Graphics g) {
         //子弹死了则移除
-        if (!living)gm.bullets.remove(this);
+        if (!living)gm.lists.remove(this);
         Color c= g.getColor();
         g.setColor(Color.GREEN);
         switch(dir){

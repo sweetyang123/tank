@@ -3,7 +3,7 @@ package frame;
 import java.awt.*;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends GameObject{
     private int x,y;
     public static  final int height=ResourceImg.goodTankD.getWidth(),
             width=ResourceImg.goodTankD.getHeight();
@@ -13,7 +13,7 @@ public class Tank {
     private static  final int SPEED=PropertyMgr.getInt("tankSpeed");
     private GameModel  gm=null;
     private Random random=new Random();
-    private Group group=Group.GOOD;
+    public Group group=Group.GOOD;
 
 
     //解决每次碰撞时创建：一开始就创建对象，再跟随tank对象，移动和初始化时赋值
@@ -43,7 +43,7 @@ public class Tank {
 
     public void paint(Graphics g) {
         if (!this.living){
-            gm.tanks.remove(this);
+            gm.lists.remove(this);
 //            tf.explodes.remove()
 //            Explode explode = new Explode(this.x, this.y, tf);
 //            explode.paint(g);
@@ -118,10 +118,10 @@ public class Tank {
         if (group==Group.GOOD){
             Dir[] dirs = Dir.values();
             for (Dir dir1:dirs) {
-                gm.bullets.add(new Bullet(bx,by,this.group,dir1,gm));
+                gm.lists.add(new Bullet(bx,by,this.group,dir1,gm));
             }
         }else {
-            gm.bullets.add(new Bullet(bx,by,this.group,dir,gm));
+            gm.lists.add(new Bullet(bx,by,this.group,dir,gm));
         }
     }
     //将坦克和子弹转为矩形，对两个矩形进行碰撞检测
@@ -139,12 +139,12 @@ public class Tank {
         }
     }
 
-    private void die() {
+    public void die() {
         this.living=false;
         int ex=this.x+Tank.width/2-Explode.width/2;
         int ey=this.y+Tank.height/2-Explode.height/2;
         //碰撞时加入爆炸
-         gm.explodes.add(new Explode(ex,ey,gm));
+         gm.lists.add(new Explode(ex,ey,gm));
     }
 
     public Rectangle getTankRect() {
