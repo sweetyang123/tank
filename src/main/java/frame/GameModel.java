@@ -2,6 +2,7 @@ package frame;
 
 import frame.cor.BulletTankCollider;
 import frame.cor.Collider;
+import frame.cor.ColliderChain;
 import frame.cor.TankTankCollider;
 
 import java.awt.*;
@@ -32,13 +33,15 @@ public class GameModel {
         for (int i = 0; i <lists.size() ; i++) {
             lists.get(i).paint(g);
         }
-        Collider collider = new BulletTankCollider();
-        Collider collider1 = new TankTankCollider();
+        Collider collider = new ColliderChain();
+//        Collider collider = new BulletTankCollider();
+//        Collider collider1 = new TankTankCollider();
         //给每个子弹与坦克进行碰撞检测
         for (int i = 0; i <lists.size() ; i++) {
             for (int j = i+1; j <lists.size() ; j++) {
+//                collider.collWith(lists.get(i),lists.get(j));
+//                collider1.collWith(lists.get(i),lists.get(j));
                 collider.collWith(lists.get(i),lists.get(j));
-                collider1.collWith(lists.get(i),lists.get(j));
             }
         }
         g.setColor(c);
