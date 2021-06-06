@@ -21,6 +21,9 @@ public class GameModel {
         for (int i = 0; i <PropertyMgr.getInt("tankCount") ; i++) {
             this.add(new Tank(80+i*100,70,Group.BAD,Dir.DOWN,this));
         }
+        for (int i = 0; i <PropertyMgr.getInt("wallCount") ; i++) {
+            this.add(new Wall(80+i*130,230,Group.BAD,Dir.DOWN,this));
+        }
     }
     public void add(GameObject go){
         lists.add(go);
