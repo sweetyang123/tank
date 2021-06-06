@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class Tank extends GameObject{
     private int x,y;
+    private int beforeX,beforeY;
     public static  final int height=ResourceImg.goodTankD.getWidth(),
             width=ResourceImg.goodTankD.getHeight();
     private Dir dir;
@@ -31,6 +32,11 @@ public class Tank extends GameObject{
         tankRect.y=this.y;
         tankRect.width=width;
         tankRect.height=height;
+    }
+//    坦克之间碰撞则回退到之前的位置
+    public void beforeStep() {
+        this.x = this.beforeX;
+        this.y = this.beforeY;
     }
 
     public Dir getDir() {
@@ -75,7 +81,8 @@ public class Tank extends GameObject{
     }
 
     private void move(){
-
+        this.beforeX=x;
+        this.beforeY=y;
         if (!moving)return;
         switch(dir){
             case LEFT : x-=SPEED;
@@ -87,6 +94,7 @@ public class Tank extends GameObject{
             case DOWN: y+=SPEED;
                 break;
         }
+       // if (beforeStep(this))x=beforeX;y=beforeY;
         if (x<0||y<0||x>gm.GAME_WIDTH||y>gm.GAME_HEIGHT)living=false;
         //坦克随机掉子弹
         if (this.group==Group.BAD&&random.nextInt(100)>95)this.fire();

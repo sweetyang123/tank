@@ -16,7 +16,7 @@ public class TestFrame  extends Frame {
         // Frame f =new Frame();
         setVisible(true);
         setResizable(false);//不能改变大小
-        setSize(800,500);
+        setSize(1080,800);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
