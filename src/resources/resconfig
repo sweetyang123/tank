@@ -3,3 +3,4 @@ GAME_WIDTH= 1080
 GAME_HEIGHT = 960
 tankSpeed=3
 bulletSpeed=10
+ColliderChain=frame.cor.BulletTankCollider,frame.cor.TankTankCollider

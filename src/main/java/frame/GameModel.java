@@ -17,12 +17,17 @@ public class GameModel {
 
     List<GameObject> lists = new ArrayList<>();
     public GameModel() {
-        lists.add(myTank);
+        this.add(myTank);
         for (int i = 0; i <PropertyMgr.getInt("tankCount") ; i++) {
-            lists.add(new Tank(80+i*100,70,Group.BAD,Dir.DOWN,this));
+            this.add(new Tank(80+i*100,70,Group.BAD,Dir.DOWN,this));
         }
     }
-
+    public void add(GameObject go){
+        lists.add(go);
+    }
+    public void remove(GameObject go){
+        lists.remove(go);
+    }
     public void paint(Graphics g){
         Color c = g.getColor();
         g.setColor(Color.MAGENTA);

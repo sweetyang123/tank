@@ -1,6 +1,7 @@
 package frame.cor;
 
 import frame.GameObject;
+import frame.PropertyMgr;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,8 +10,19 @@ public class ColliderChain implements Collider{
    List<Collider> colliders = new LinkedList<>();
 
    public ColliderChain() {
-      this.add(new TankTankCollider());
-      this.add(new BulletTankCollider());
+     String chains= PropertyMgr.getString("ColliderChain");
+     if(chains!=null&&!chains.equals("")){
+        for (String chain:chains.split(",")) {
+           try {
+              this.add((Collider) Class.forName(chain).newInstance());
+           } catch (Exception e) {
+              e.printStackTrace();
+           }
+        }
+     }
+//
+//      this.add(new TankTankCollider());
+//      this.add(new BulletTankCollider());
    }
 
    public void  add(Collider collider){
