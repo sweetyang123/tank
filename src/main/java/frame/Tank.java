@@ -12,7 +12,6 @@ public class Tank extends GameObject{
     private boolean moving=true;
     private boolean living=true;
     private static  final int SPEED=PropertyMgr.getInt("tankSpeed");
-    private GameModel  gm=null;
     private Random random=new Random();
     public Group group=Group.GOOD;
 
@@ -21,17 +20,17 @@ public class Tank extends GameObject{
     private  Rectangle tankRect=new Rectangle();
 //    private  Rectangle tankRect=new Rectangle(this.x,this.y,width,height);
 
-    public Tank(int x, int y,Group group,Dir dir,GameModel  gm) {
+    public Tank(int x, int y,Group group,Dir dir) {
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
-        this.gm = gm;
 
         tankRect.x=this.x;
         tankRect.y=this.y;
         tankRect.width=width;
         tankRect.height=height;
+        GameModel.getInstance().add(this);
     }
 //    坦克之间碰撞则回退到之前的位置
     public void beforeStep() {
@@ -49,7 +48,7 @@ public class Tank extends GameObject{
 
     public void paint(Graphics g) {
         if (!this.living){
-            gm.lists.remove(this);
+            GameModel.getInstance().remove(this);
 //            tf.explodes.remove()
 //            Explode explode = new Explode(this.x, this.y, tf);
 //            explode.paint(g);
@@ -95,7 +94,7 @@ public class Tank extends GameObject{
                 break;
         }
        // if (beforeStep(this))x=beforeX;y=beforeY;
-        if (x<0||y<0||x>gm.GAME_WIDTH||y>gm.GAME_HEIGHT)living=false;
+        if (x<0||y<0||x>GameModel.getInstance().GAME_WIDTH||y>GameModel.getInstance().GAME_HEIGHT)living=false;
         //坦克随机掉子弹
         if (this.group==Group.BAD&&random.nextInt(100)>95)this.fire();
         //坦克随机动
@@ -110,8 +109,8 @@ public class Tank extends GameObject{
     private void boundsCheck() {
         if (this.x<5)x=5;
         if (this.y<25)y=25;
-        if (this.x>gm.GAME_WIDTH-this.width-5)x=gm.GAME_WIDTH-this.width-5;
-        if (this.y>gm.GAME_HEIGHT-this.height-5)y=gm.GAME_HEIGHT-this.height-5;
+        if (this.x>GameModel.getInstance().GAME_WIDTH-this.width-5)x=GameModel.getInstance().GAME_WIDTH-this.width-5;
+        if (this.y>GameModel.getInstance().GAME_HEIGHT-this.height-5)y=GameModel.getInstance().GAME_HEIGHT-this.height-5;
 
     }
 
@@ -126,10 +125,10 @@ public class Tank extends GameObject{
         if (group==Group.GOOD){
             Dir[] dirs = Dir.values();
             for (Dir dir1:dirs) {
-                gm.lists.add(new Bullet(bx,by,this.group,dir1,gm));
+                new Bullet(bx,by,this.group,dir1);
             }
         }else {
-            gm.lists.add(new Bullet(bx,by,this.group,dir,gm));
+            new Bullet(bx,by,this.group,dir);
         }
     }
     //将坦克和子弹转为矩形，对两个矩形进行碰撞检测
@@ -152,7 +151,7 @@ public class Tank extends GameObject{
         int ex=this.x+Tank.width/2-Explode.width/2;
         int ey=this.y+Tank.height/2-Explode.height/2;
         //碰撞时加入爆炸
-         gm.lists.add(new Explode(ex,ey,gm));
+        new Explode(ex,ey);
     }
 
     public Rectangle getTankRect() {

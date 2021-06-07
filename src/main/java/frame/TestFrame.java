@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
 
 public class TestFrame  extends Frame {
 
-    GameModel gm = new GameModel();
 
     public TestFrame(){
         // Frame f =new Frame();
@@ -28,7 +27,7 @@ public class TestFrame  extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        gm.paint(g);
+       GameModel.getInstance().paint(g);
     }
 
     Image offScreenImage = null;
@@ -36,12 +35,12 @@ public class TestFrame  extends Frame {
     @Override
     public void update(Graphics g) {
         if (offScreenImage == null) {
-            offScreenImage = this.createImage(gm.GAME_WIDTH, gm.GAME_HEIGHT);
+            offScreenImage = this.createImage(GameModel.getInstance().GAME_WIDTH, GameModel.getInstance().GAME_HEIGHT);
         }
         Graphics gOffScreen = offScreenImage.getGraphics();
         Color c = gOffScreen.getColor();
         gOffScreen.setColor(Color.BLACK);
-        gOffScreen.fillRect(0, 0,gm.GAME_WIDTH, gm.GAME_HEIGHT);
+        gOffScreen.fillRect(0, 0,GameModel.getInstance().GAME_WIDTH, GameModel.getInstance().GAME_HEIGHT);
         gOffScreen.setColor(c);
         paint(gOffScreen);
         g.drawImage(offScreenImage, 0, 0, null);
@@ -63,11 +62,11 @@ public class TestFrame  extends Frame {
                     break;
                 case KeyEvent.VK_DOWN:BD=true;
                     break;
-                case KeyEvent.VK_CONTROL:gm.myTank.fire();
+                case KeyEvent.VK_CONTROL:GameModel.getInstance().myTank.fire();
                     break;
                 default: break;
             }
-            gm.setMainTankDir(BL,BR,BU,BD);
+            GameModel.getInstance().setMainTankDir(BL,BR,BU,BD);
         }
 
         @Override
@@ -84,7 +83,7 @@ public class TestFrame  extends Frame {
                     break;
                 default: break;
             }
-            gm.setMainTankDir(BL,BR,BU,BD);
+            GameModel.getInstance().setMainTankDir(BL,BR,BU,BD);
         }
 
     }
