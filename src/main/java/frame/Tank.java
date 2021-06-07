@@ -10,8 +10,8 @@ import java.util.Random;
 public class Tank extends GameObject{
 //    private int x,y;
     private int beforeX,beforeY;
-    public static  final int height=ResourceImg.goodTankD.getWidth(),
-            width=ResourceImg.goodTankD.getHeight();
+    public static  final int height=ResourceImg.goodTankD.getHeight(),
+            width=ResourceImg.goodTankD.getWidth();
     private Dir dir;
     private boolean moving=true;
     private boolean living=true;
@@ -144,6 +144,7 @@ public class Tank extends GameObject{
             }
         }else {
             GODecorator god=new RectDecorator(new Bullet(bx,by,this.group,dir));
+
             GameModel.getInstance().add(new TailDecorator(god));
 //            new Bullet(bx,by,this.group,dir);
         }
