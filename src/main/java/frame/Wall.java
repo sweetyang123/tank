@@ -8,8 +8,10 @@ public class Wall extends GameObject{
     public static  final int height=100,
             width=10;
 
+
     //解决每次碰撞时创建：一开始就创建对象，再跟随tank对象，移动和初始化时赋值
     private  Rectangle wallRect=new Rectangle();
+
     public Wall(int x, int y) {
         this.x = x;
         this.y = y;

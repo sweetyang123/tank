@@ -1,5 +1,8 @@
 package frame;
 
+import frame.decorator.GODecorator;
+import frame.decorator.RectDecorator;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -128,21 +131,9 @@ public class Tank extends GameObject{
                 new Bullet(bx,by,this.group,dir1);
             }
         }else {
-            new Bullet(bx,by,this.group,dir);
-        }
-    }
-    //将坦克和子弹转为矩形，对两个矩形进行碰撞检测
-    public void collWith(Bullet bullet) {
-//        分组相同，则不进行碰撞
-        if (this.group==bullet.getGroup()) return;
-//        Rectangle tankRect = new Rectangle(this.x,this.y,width,height);
-//        Rectangle bulletRect = new Rectangle(bullet.getX(),bullet.getY(),bullet.width,bullet.height);
-        if (this.tankRect.intersects(bullet.getBulletRect())){
-            //碰撞后子弹和坦克都死掉，从list里移除，并living属性为false
-            this.die();
-            bullet.die();
-            //产生碰撞时加入爆炸或死时爆炸
-           // tf.explodes.add(new Explode(this.x,this.y,tf));
+            GODecorator god=new RectDecorator(new Bullet(bx,by,this.group,dir));
+            GameModel.getInstance().add(god);
+//            new Bullet(bx,by,this.group,dir);
         }
     }
 
