@@ -6,7 +6,7 @@ import java.awt.*;
  * 子弹
  */
 public class Explode extends GameObject{
-    private int x,y;
+//    private int x,y;
     public static final int width=ResourceImg.explodes[0].getWidth(),
             height= ResourceImg.explodes[0].getHeight();
     int step=0;
@@ -19,5 +19,15 @@ public class Explode extends GameObject{
         g.drawImage(ResourceImg.explodes[step++],x,y,null);
         //爆炸的图片显示完后，则从将该爆炸从爆炸组中移除
         if (step>=ResourceImg.explodes.length)GameModel.getInstance().remove(this);
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 }

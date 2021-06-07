@@ -2,12 +2,13 @@ package frame;
 
 import frame.decorator.GODecorator;
 import frame.decorator.RectDecorator;
+import frame.decorator.TailDecorator;
 
 import java.awt.*;
 import java.util.Random;
 
 public class Tank extends GameObject{
-    private int x,y;
+//    private int x,y;
     private int beforeX,beforeY;
     public static  final int height=ResourceImg.goodTankD.getWidth(),
             width=ResourceImg.goodTankD.getHeight();
@@ -24,6 +25,7 @@ public class Tank extends GameObject{
 //    private  Rectangle tankRect=new Rectangle(this.x,this.y,width,height);
 
     public Tank(int x, int y,Group group,Dir dir) {
+        super();
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -72,6 +74,16 @@ public class Tank extends GameObject{
         //g.fillRect(x,y,width,height);
         g.setColor(c);
         move();
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 
     public boolean isMoving() {
@@ -132,7 +144,7 @@ public class Tank extends GameObject{
             }
         }else {
             GODecorator god=new RectDecorator(new Bullet(bx,by,this.group,dir));
-            GameModel.getInstance().add(god);
+            GameModel.getInstance().add(new TailDecorator(god));
 //            new Bullet(bx,by,this.group,dir);
         }
     }

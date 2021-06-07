@@ -4,8 +4,8 @@ import frame.GameObject;
 
 import java.awt.*;
 
-public class RectDecorator extends GODecorator {
-    public RectDecorator(GameObject go) {
+public class TailDecorator extends GODecorator {
+    public TailDecorator(GameObject go) {
         super(go);
     }
 
@@ -16,8 +16,8 @@ public class RectDecorator extends GODecorator {
         go.paint(g);
 
         Color c =g.getColor();
-        g.setColor(Color.RED);
-        g.drawRect(go.x,go.y,getWidth()+2,getHeight()+2);
+        g.setColor(Color.YELLOW);
+        g.drawLine(go.x,go.y,go.x+getWidth(),go.y+getHeight());
         g.setColor(c);
     }
 

@@ -6,9 +6,7 @@ import java.awt.*;
  * 子弹
  */
 public class Bullet extends  GameObject{
-
-
-    private int x,y;
+//    private int x,y;
     public static final int width=ResourceImg.bulletD.getWidth(),
             height= ResourceImg.bulletD.getHeight();
     private Dir dir =Dir.DOWN;
@@ -51,6 +49,17 @@ public class Bullet extends  GameObject{
         g.setColor(c);
         move();
     }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
     private void move(){
         switch(dir){
             case LEFT : x-=SPEED;

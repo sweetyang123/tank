@@ -4,7 +4,7 @@ import java.awt.*;
 import java.util.Random;
 
 public class Wall extends GameObject{
-    private int x,y;
+//    private int x,y;
     public static  final int height=100,
             width=10;
 
@@ -27,6 +27,16 @@ public class Wall extends GameObject{
         g.setColor(Color.WHITE);
         g.fillRect(x,y,width,height);
         g.setColor(c);
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 
     public Rectangle getWallRect() {

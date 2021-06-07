@@ -3,5 +3,5 @@ wallCount=5
 GAME_WIDTH= 1080
 GAME_HEIGHT = 960
 tankSpeed=3
-bulletSpeed=10
+bulletSpeed=5
 ColliderChain=frame.cor.BulletTankCollider,frame.cor.TankTankCollider,frame.cor.TankWallCollider,frame.cor.BulletWallCollider
