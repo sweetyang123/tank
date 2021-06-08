@@ -6,7 +6,6 @@ import java.awt.*;
  * 子弹
  */
 public class Explode extends GameObject{
-//    private int x,y;
     public static final int width=ResourceImg.explodes[0].getWidth(),
             height= ResourceImg.explodes[0].getHeight();
     int step=0;

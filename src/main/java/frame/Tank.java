@@ -8,7 +8,6 @@ import java.awt.*;
 import java.util.Random;
 
 public class Tank extends GameObject{
-//    private int x,y;
     private int beforeX,beforeY;
     public static  final int height=ResourceImg.goodTankD.getHeight(),
             width=ResourceImg.goodTankD.getWidth();

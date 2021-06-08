@@ -6,7 +6,6 @@ import java.awt.*;
  * 子弹
  */
 public class Bullet extends  GameObject{
-//    private int x,y;
     public static final int width=ResourceImg.bulletD.getWidth(),
             height= ResourceImg.bulletD.getHeight();
     private Dir dir =Dir.DOWN;

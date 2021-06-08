@@ -4,7 +4,6 @@ import java.awt.*;
 import java.util.Random;
 
 public class Wall extends GameObject{
-//    private int x,y;
     public static  final int height=100,
             width=10;
 
