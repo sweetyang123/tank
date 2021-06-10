@@ -4,10 +4,11 @@ import frame.cor.Collider;
 import frame.cor.ColliderChain;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameModel {
+public class GameModel{
     private static final GameModel  gm= new GameModel();
     static Tank myTank =null;
     static final int GAME_WIDTH = PropertyMgr.getInt("GAME_WIDTH"),
@@ -62,6 +63,50 @@ public class GameModel {
             if (BR)myTank.setDir(Dir.RIGHT);
             if (BU)myTank.setDir(Dir.UP);
             if (BD)myTank.setDir(Dir.DOWN);
+        }
+
+    }
+    //保存当前快照
+    public void save(){
+        ObjectOutputStream oos=null;
+        File file = new File("E:/code/mashibing/tank.data");
+        try {
+            oos=new ObjectOutputStream(new FileOutputStream(file));
+            oos.writeObject(lists);
+            oos.writeObject(myTank);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (oos!=null) {
+                try {
+                    oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+    //读取之前的快照，恢复之前的mytank和lists
+    public void load(){
+        ObjectInputStream ois=null;
+        try {
+            ois=new ObjectInputStream(new FileInputStream("E:/code/mashibing/tank.data"));
+            //先进先出
+            lists=(List<GameObject>) ois.readObject();
+            myTank=(Tank) ois.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (ois!=null) {
+                try {
+                    ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }

@@ -15,7 +15,8 @@ public class TestFrame  extends Frame {
         // Frame f =new Frame();
         setVisible(true);
         setResizable(false);//不能改变大小
-        setSize(1080,800);
+//        setSize(1080,800);
+        setSize(500,500);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -63,6 +64,14 @@ public class TestFrame  extends Frame {
                 case KeyEvent.VK_DOWN:BD=true;
                     break;
                 case KeyEvent.VK_CONTROL:GameModel.getInstance().myTank.fire();
+                    break;
+                case KeyEvent.VK_A:
+                    System.out.println(11);
+                    GameModel.getInstance().save();
+                    break;
+                case KeyEvent.VK_S:
+                    System.out.println(22);
+                    GameModel.getInstance().load();
                     break;
                 default: break;
             }

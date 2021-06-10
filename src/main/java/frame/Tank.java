@@ -142,10 +142,9 @@ public class Tank extends GameObject{
                 new Bullet(bx,by,this.group,dir1);
             }
         }else {
-            GODecorator god=new RectDecorator(new Bullet(bx,by,this.group,dir));
-
-            GameModel.getInstance().add(new TailDecorator(god));
-//            new Bullet(bx,by,this.group,dir);
+//            GODecorator god=new RectDecorator(new Bullet(bx,by,this.group,dir));
+//            GameModel.getInstance().add(new TailDecorator(god));
+            new Bullet(bx,by,this.group,dir);
         }
     }
 
