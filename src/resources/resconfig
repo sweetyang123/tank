@@ -5,3 +5,4 @@ GAME_HEIGHT = 960
 tankSpeed=3
 bulletSpeed=5
 ColliderChain=frame.cor.BulletTankCollider,frame.cor.TankTankCollider,frame.cor.TankWallCollider,frame.cor.BulletWallCollider
+dir=E:/code/mashibing/github/tank/src/main/java/
